@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* ============================================================
+   VIVID ROOFS — Trades Industrial style frame
+   Industrial dark + safety orange + license-badge yellow
+   ============================================================ */
+@theme {
+  --color-background: #0f1419;   /* industrial dark */
+  --color-surface: #1c242f;      /* cards / alt sections */
+  --color-surface-2: #161d26;    /* subtle alt */
+  --color-foreground: #e6e8eb;   /* text */
+  --color-muted: #8b96a5;        /* secondary text */
+  --color-accent: #ff6b1f;       /* safety orange */
+  --color-accent-deep: #d4521a;  /* hover orange */
+  --color-badge: #ffd93d;        /* license / insured badges */
+  --color-line: #2a333f;         /* borders */
+
+  --font-display: var(--font-bebas), "Oswald", "Arial Narrow", sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+
+  /* Custom easing — use everywhere instead of ease-in-out */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html, body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  font-feature-settings: 'kern', 'liga', 'calt';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tabular numerals for counters */
+.tabular {
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+}
+
+/* Condensed signage display font */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+/* Lenis smooth-scroll plumbing */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Hero readability overlay — bottom-weighted */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 20, 25, 0.55) 0%,
+    rgba(15, 20, 25, 0.15) 28%,
+    rgba(15, 20, 25, 0.35) 62%,
+    rgba(15, 20, 25, 0.96) 100%
+  );
+}
+
+/* Section image readability overlay */
+.img-overlay {
+  background: linear-gradient(180deg, rgba(15,20,25,0.1) 0%, rgba(15,20,25,0.85) 100%);
+}
+
+/* Designed dark fallback if an image is slow/missing */
+.bg-fallback {
+  background:
+    radial-gradient(ellipse at top, rgba(255, 107, 31, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(30, 90, 138, 0.18) 0%, transparent 65%),
+    linear-gradient(135deg, #1c242f 0%, #0a0d11 100%);
+}
+
+::selection { background: var(--color-accent); color: #0f1419; }
+
+/* Hide native cursor where magnetic cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  body.has-magnetic-cursor,
+  body.has-magnetic-cursor a,
+  body.has-magnetic-cursor button { cursor: none; }
+  body.has-magnetic-cursor input,
+  body.has-magnetic-cursor textarea { cursor: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
